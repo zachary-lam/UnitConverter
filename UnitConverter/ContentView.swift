@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var inputUnit: String = "F"
+    @State private var outputUnit: String = "C"
+    
+    let units: Array<String> = ["F", "C", "K"]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            Form {
+                Section("Input") {
+                    Picker("", selection: $inputUnit) {
+                        ForEach(units, id: \.self) {
+                            Text("\($0)°")
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+                
+                Section("Output") {
+                    Picker("", selection: $outputUnit) {
+                        ForEach(units, id: \.self) {
+                            Text("\($0)°")
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+            }
+            .navigationTitle("Unit Converter")
         }
-        .padding()
     }
 }
 
