@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var inputUnit: String = "F"
     @State private var outputUnit: String = "C"
+    @State private var temperatureInput: Double = 0.0
     
     let units: Array<String> = ["F", "C", "K"]
     
@@ -32,6 +33,11 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                }
+                
+                Section("Temperature (\(inputUnit)°)") {
+                    TextField("Temperature Input", value: $temperatureInput, format: .number)
+                        .keyboardType(.decimalPad)
                 }
             }
             .navigationTitle("Unit Converter")
